@@ -16,6 +16,13 @@ jobs:
         run:  echo "is-org-member-result=$(gh api -X GET orgs/PaloAltoNetworks/memberships/${{ github.actor }} | jq -r .message)" >> "$GITHUB_OUTPUT"
     env:
       GH_TOKEN: ${{ secrets.PAT }}
+      
+  precheck_result:
+    name: Precheck Result
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output result
+        run:  echo ${{ needs.precheck.outputs.is-org-member-result }}
 
   analyze:
     if: github.repository_owner	== 'PaloAltoNetworks' && needs.precheck.outputs.is-org-member-result == null
