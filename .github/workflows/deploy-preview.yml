@@ -8,6 +8,7 @@ jobs:
   precheck:
     name: Precheck
     runs-on: ubuntu-latest
+    permissions: read-all
     steps:
       - name: Check if actor is org member
         id: is-org-member
