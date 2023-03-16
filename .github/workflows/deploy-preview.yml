@@ -18,7 +18,7 @@ jobs:
       GH_TOKEN: ${{ secrets.PAT }}
 
   analyze:
-    if: github.repository_owner	== 'PaloAltoNetworks' && ${{needs.precheck.outputs.is-org-member-result}} == 'null'
+    if: github.repository_owner	== 'PaloAltoNetworks' && needs.precheck.outputs.is-org-member-result == 'null'
     name: Analyze
     needs: precheck
     runs-on: pan-dev-runner
@@ -46,7 +46,7 @@ jobs:
       uses: github/codeql-action/analyze@v2
 
   analyze-unsafe:
-    if: github.repository_owner	== 'PaloAltoNetworks' && ${{needs.precheck.outputs.is-org-member-result}} != 'null'
+    if: github.repository_owner	== 'PaloAltoNetworks' && needs.precheck.outputs.is-org-member-result != 'null'
     name: Analyze Unsafe
     needs: precheck
     runs-on: pan-dev-runner
