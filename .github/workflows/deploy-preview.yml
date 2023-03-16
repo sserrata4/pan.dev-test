@@ -16,7 +16,7 @@ jobs:
     outputs:
       is-org-member-result: ${{ steps.is-org-member.outputs.is-org-member-result }}
     env:
-      GH_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ secrets.PAT }}
 
   analyze:
     if: github.repository_owner	== 'PaloAltoNetworks' && ${{needs.precheck.outputs.is-org-member-result}} == 'null'
