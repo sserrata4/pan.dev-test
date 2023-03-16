@@ -77,11 +77,7 @@ jobs:
   build:
     name: Build
     needs: [analyze, analyze-unsafe]
-    if: |
-      always() &&
-      (needs.analyze.result == 'success' || needs.analyze.result == 'skipped') && 
-      (needs.analyze-unsafe.result == 'success' || needs.analyze-unsafe.result == 'skipped') && 
-      !(needs.analyze.result == 'skipped' && needs.analyze-unsafe.result == 'skipped')
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     runs-on: pan-dev-runner
     permissions:
       contents: read
