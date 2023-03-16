@@ -19,6 +19,7 @@ jobs:
       
   precheck_result:
     name: Precheck Result
+    needs: precheck
     runs-on: ubuntu-latest
     steps:
       - name: Output result
